@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <FdShell>
+    <FdShellHeader><ShellBar /></FdShellHeader>
+    <FdApp>
+      <FdAppNavigation orientation="vertical">
+        <FdSideNav mode="router">
+          <FdSideNavList :items="navigationItems" />
+        </FdSideNav>
+      </FdAppNavigation>
+      <FdAppMain>
+        <router-view />
+      </FdAppMain>
+    </FdApp>
+  </FdShell>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ShellBar from '@/components/ShellBar.vue'
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "App",
+  components: { ShellBar },
+  data() {
+    return {
+      navigationItems: [
+        { id: "home", name: "Home", icon: "home", to: { name: "home" } },
+        { id: "mypage", name: "My Page", icon: "group", to: { name: "mypage" } },
+        {
+          id: "about",
+          name: "About",
+          icon: "sap-logo-shape",
+          to: { name: "about" }
+        }
+      ]
+    };
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
